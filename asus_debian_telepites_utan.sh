@@ -117,8 +117,28 @@ table inet filter {
 	}
 }' | sudo tee /etc/nftables.conf
 sudo nft -f /etc/nftables.conf
-sudo nft list ruleset
-echo "***** Az nftables beállítása sikeres! *****";
+feltetel=$(sudo nft list ruleset)
+szoveg='table inet filter {
+	chain input {
+		type filter hook input priority filter; policy drop;
+		iif "lo" accept
+		ct state established,related accept
+		ct state invalid drop
+		udp dport { 3478-3479, 10000-20000 } accept
+		tcp dport 443 ct state new accept
+	}
+
+	chain forward {
+		type filter hook forward priority filter; policy drop;
+	}
+
+	chain output {
+		type filter hook output priority filter; policy accept;
+	}
+}'
+if [ "$feltetel" == "$szoveg" ]; then
+  echo "***** Az nftables beállítása sikeres! *****";
+fi
 sleep 5
 
 # -------------------------------------------------------------------------
