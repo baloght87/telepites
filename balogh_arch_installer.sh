@@ -269,7 +269,5 @@ clear &&
 mkinitcpio -P
 END
 clear
-exit
-umount -R /mnt
 echo "Reboot the system! Enable Secure boot in BIOS!"
 
