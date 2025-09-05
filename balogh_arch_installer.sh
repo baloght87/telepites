@@ -33,7 +33,7 @@ sleep 5 &&
   echo n;
   echo ;
   echo ;
-  echo +800M;
+  echo +1G;
   echo n;
   echo ;
   echo ;
@@ -42,7 +42,7 @@ sleep 5 &&
   echo 1;
   echo 1;
   echo w;
-) | fdisk /dev/sda &&
+) | fdisk /dev/sda
 
 clear &&
 lsblk &&
