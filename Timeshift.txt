@@ -1,0 +1,18 @@
+﻿Create:
+sudo timeshift --create --comments "Initial snapshot" --target-device /backup --rsync
+
+Exclude:
+sudo timeshift --exclude /backup
+(Permanent exclusion requires editing /etc/timeshift.json
+
+List snapshots after creation:
+sudo timeshift --list
+
+Restore Command (When Needed):
+sudo timeshift --restore --snapshot 'YYYY-MM-DD_HH-MM-SS' --target /backup
+
+************************
+
+Verification:
+sudo timeshift --list  # Should show your new snapshot
+ls /mnt/backup/timeshift  # Should contain snapshot folders
